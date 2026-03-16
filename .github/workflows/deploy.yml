@@ -1,0 +1,16 @@
+name: Deploy Preview
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  run-command:
+    if: >
+      github.event.issue.pull_request &&
+      github.event.comment.body == '/deploy'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: React to command
+        run: echo "Deploying preview for PR #${{ github.event.issue.number }}"
